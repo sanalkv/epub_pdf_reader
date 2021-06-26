@@ -1,5 +1,5 @@
 An app to read epub and pdf files in android.
-![Screenshot_1623567589](https://user-images.githubusercontent.com/30585556/123521655-a7693480-d6d5-11eb-9914-564626b6b83e.png){:height="50%" width="50%"}
+![Screenshot_1623567589](https://user-images.githubusercontent.com/30585556/123521655-a7693480-d6d5-11eb-9914-564626b6b83e.png?v=4&s=200)
 ![Screenshot_1623567599](https://user-images.githubusercontent.com/30585556/123521658-ab955200-d6d5-11eb-93ff-eb5e20472323.png){:height="50%" width="50%"}
 ![Screenshot_1623567612](https://user-images.githubusercontent.com/30585556/123521660-ac2de880-d6d5-11eb-8654-a023c9ab7315.png){:height="50%" width="50%"}
 ![Screenshot_1623567694](https://user-images.githubusercontent.com/30585556/123521661-ad5f1580-d6d5-11eb-84fd-ab4ad6d16853.png){:height="50%" width="50%"}
