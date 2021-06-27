@@ -1,12 +1,12 @@
 
 class BookDetails {
-  String fileExtension;
-  int id;
-  String title;
-  String path;
-  String lastReadPosition;
-  String coverImage;
-  String author;
+  String? fileExtension;
+  int? id;
+  String? title;
+  String? path;
+  String? lastReadPosition;
+  String? coverImage;
+  String? author;
 
   BookDetails({
     this.id,
@@ -29,7 +29,7 @@ class BookDetails {
     };
   }
 
-  factory BookDetails.fromMap(Map<String, dynamic> json) => BookDetails(
+  factory BookDetails.fromMap(Map<dynamic, dynamic> json) => BookDetails(
         id: json["id"],
         title: json["title"],
         path: json["path"],

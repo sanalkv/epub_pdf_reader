@@ -20,8 +20,8 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  GlobalKey<AnimatedListState> animatedListkey;
-  ScrollController scrollController;
+  late GlobalKey<AnimatedListState> animatedListkey;
+  late ScrollController scrollController;
 
   @override
   void initState() {
@@ -72,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
                   onTap: () async {
                     final isBookAdded = await viewModel.pickAndSaveBook();
                     if (isBookAdded) {
-                      animatedListkey.currentState.insertItem(viewModel.newlyAddedBookIndex);
+                      animatedListkey.currentState?.insertItem(viewModel.newlyAddedBookIndex);
                       await Future.delayed(Duration(milliseconds: 300));
                       scrollController.animateTo(
                         scrollController.position.maxScrollExtent + 156,
@@ -193,12 +193,12 @@ class _HomeViewState extends State<HomeView> {
       context: context,
       builder: (_) {
         return DeleteDialogWidget(
-          bookTitle: bookDetails.title,
+          bookTitle: bookDetails.title!,
           onDeletePressed: () async {
             Navigator.of(context).pop();
             await Future.delayed(Duration(milliseconds: 100));
             await viewModel.deleteBook(bookDetails);
-            animatedListkey.currentState.removeItem(
+            animatedListkey.currentState?.removeItem(
               index,
               (context, animation) => SizeTransition(
                 sizeFactor: animation,

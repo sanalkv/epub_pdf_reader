@@ -6,12 +6,12 @@
 
 // ignore_for_file: public_member_api_docs
 
-import 'package:epub_reader/ui/home/home_view.dart';
-import 'package:epub_reader/ui/pdf/pdf_view.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../core/model/book_details_model.dart';
+import '../ui/home/home_view.dart';
+import '../ui/pdf/pdf_view.dart';
 
 class Routes {
   static const String homeView = '/';
@@ -39,9 +39,7 @@ class StackedRouter extends RouterBase {
       );
     },
     PdfView: (data) {
-      var args = data.getArgs<PdfViewArguments>(
-        orElse: () => PdfViewArguments(),
-      );
+      var args = data.getArgs<PdfViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) => PdfView(
           key: args.key,
@@ -59,7 +57,7 @@ class StackedRouter extends RouterBase {
 
 /// PdfView arguments holder class
 class PdfViewArguments {
-  final Key key;
+  final Key? key;
   final BookDetails bookDetails;
-  PdfViewArguments({this.key,this.bookDetails});
+  PdfViewArguments({this.key, required this.bookDetails});
 }

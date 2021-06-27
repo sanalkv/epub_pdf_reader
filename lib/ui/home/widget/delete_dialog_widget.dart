@@ -7,9 +7,9 @@ class DeleteDialogWidget extends StatelessWidget {
   final Function() onDeletePressed;
   final String bookTitle;
   const DeleteDialogWidget({
-    Key key,
-    this.onDeletePressed,
-    this.bookTitle,
+    Key? key,
+    required this.onDeletePressed,
+    required this.bookTitle,
   }) : super(key: key);
 
   @override

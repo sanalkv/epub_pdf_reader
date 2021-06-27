@@ -8,17 +8,17 @@ import 'package:flutter/material.dart';
 class BookCoverWidget extends StatelessWidget {
   final BookDetails bookDetails;
 
-  const BookCoverWidget({Key key, @required this.bookDetails}) : super(key: key);
+  const BookCoverWidget({Key? key, required this.bookDetails}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     if (bookDetails.coverImage != null) {
       return Image.file(
-        File(bookDetails.coverImage),
+        File(bookDetails.coverImage!),
         fit: BoxFit.fill,
         width: double.infinity,
         height: double.infinity,
         gaplessPlayback: true,
-        frameBuilder: (BuildContext context, Widget child, int frame, bool wasSynchronouslyLoaded) {
+        frameBuilder: (BuildContext context, Widget child, int? frame, bool wasSynchronouslyLoaded) {
           if (wasSynchronouslyLoaded) return child;
           return AnimatedOpacity(
             opacity: frame == null ? 0 : 1,
@@ -38,7 +38,7 @@ class BookCoverWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              bookDetails.author,
+              bookDetails.author!,
               style: body2Style,
               textAlign: TextAlign.center,
               maxLines: 2,
@@ -46,7 +46,7 @@ class BookCoverWidget extends StatelessWidget {
             Spacer(),
             verticalSpacing4,
             Text(
-              bookDetails.title,
+              bookDetails.title!,
               style: heading3Style,
               textAlign: TextAlign.center,
               maxLines: 3,

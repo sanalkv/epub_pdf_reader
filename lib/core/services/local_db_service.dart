@@ -7,16 +7,16 @@ import 'package:path/path.dart';
 import '../model/book_details_model.dart';
 
 class LocalDBService {
-  static Database _db;
+  static Database? _db;
   Future<Database> get db async {
     if (_db != null) {
-      return _db;
+      return _db!;
     }
     _db = await initDatabase();
-    return _db;
+    return _db!;
   }
 
-  initDatabase() async {
+  Future<Database> initDatabase() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentDirectory.path, 'bookdetail.db');
     var db = await openDatabase(path, version: 2, onCreate: _onCreate);

@@ -68,7 +68,7 @@ class HomeViewModel extends BaseViewModel {
 
   void _initialiseEpub() {
     EpubViewer.setConfig(
-      themeColor: Colors.brown[300],
+      themeColor: Colors.brown[300]!,
       scrollDirection: EpubScrollDirection.HORIZONTAL,
       allowSharing: true,
       enableTts: true,
@@ -77,8 +77,8 @@ class HomeViewModel extends BaseViewModel {
 
   void _openEpub(BookDetails bookDetails) {
     EpubViewer.open(
-      bookDetails.path,
-      lastLocation: bookDetails.lastReadPosition != null ? EpubLocator.fromJson(json.decode(bookDetails.lastReadPosition)) : null,
+      bookDetails.path!,
+      lastLocation: bookDetails.lastReadPosition != null ? EpubLocator.fromJson(json.decode(bookDetails.lastReadPosition!)) : null,
     );
     EpubViewer.locatorStream.listen((locator) async {
       bookDetails.lastReadPosition = locator;
@@ -99,7 +99,7 @@ class HomeViewModel extends BaseViewModel {
   Future<bool> _saveBookContent(PlatformFile file) async {
     bool _didBookSave = false;
     if (file.extension == BookType.epub.extension) {
-      final bookDetails = await _saveEpubContent(file.path);
+      final bookDetails = await _saveEpubContent(file.path!);
       if (bookDetails != null) {
         await _addNewBook(bookDetails);
         await _getBooks();
@@ -114,7 +114,7 @@ class HomeViewModel extends BaseViewModel {
         _didBookSave = false;
       }
     } else if (file.extension == BookType.pdf.extension) {
-      final bookDetails = await _savePDFContent(file.path);
+      final bookDetails = await _savePDFContent(file.path!);
       if (bookDetails != null) {
         await _addNewBook(bookDetails);
         await _getBooks();
@@ -125,24 +125,24 @@ class HomeViewModel extends BaseViewModel {
     return _didBookSave;
   }
 
-  Future<BookDetails> _savePDFContent(String localFilePath) async {
+  Future<BookDetails?> _savePDFContent(String localFilePath) async {
     try {
       BookDetails bookDetails = BookDetails();
       final _pdfDoc = await PDFDoc.fromPath(localFilePath);
       final document = await PDFDocument.fromFile(File(localFilePath));
       PDFPage pageOne = await document.get(page: 1);
-      if (pageOne.imgPath != null && pageOne.imgPath.isNotEmpty) {
+      if (pageOne.imgPath != null && pageOne.imgPath!.isNotEmpty) {
         final directory = await getApplicationDocumentsDirectory();
         final filePath = '${directory.path}/${DateTime.now().toIso8601String()}';
-        final file = File(pageOne.imgPath);
+        final file = File(pageOne.imgPath!);
         await file.copy(filePath);
         bookDetails.coverImage = filePath;
       }
-      if (_pdfDoc.info.authors == null || _pdfDoc.info.authors.isEmpty)
+      if (_pdfDoc.info.authors == null || _pdfDoc.info.authors!.isEmpty)
         bookDetails.author = '';
       else
-        bookDetails.author = _pdfDoc.info.authors.join(',');
-      if (_pdfDoc.info.title == null || _pdfDoc.info.title.isEmpty)
+        bookDetails.author = _pdfDoc.info.authors!.join(',');
+      if (_pdfDoc.info.title == null || _pdfDoc.info.title!.isEmpty)
         bookDetails.title = 'PDF';
       else
         bookDetails.title = _pdfDoc.info.title;
@@ -155,7 +155,7 @@ class HomeViewModel extends BaseViewModel {
     }
   }
 
-  Future<BookDetails> _saveEpubContent(String localFilePath) async {
+  Future<BookDetails?> _saveEpubContent(String localFilePath) async {
     try {
       BookDetails bookDetails = BookDetails();
       var targetFile = File(localFilePath);
@@ -166,15 +166,15 @@ class HomeViewModel extends BaseViewModel {
         final filePath = '${directory.path}/${DateTime.now().toIso8601String()}';
         final file = File(filePath);
         await file.writeAsBytes(
-          image.encodePng(epubBook.CoverImage),
+          image.encodePng(epubBook.CoverImage!),
         );
         bookDetails.coverImage = filePath;
       }
-      if (epubBook.Author == null || epubBook.Author.isEmpty)
+      if (epubBook.Author == null || epubBook.Author!.isEmpty)
         bookDetails.author = '';
       else
         bookDetails.author = epubBook.Author;
-      if (epubBook.Title == null || epubBook.Title.isEmpty)
+      if (epubBook.Title == null || epubBook.Title!.isEmpty)
         bookDetails.title = 'EPUB';
       else
         bookDetails.title = epubBook.Title;

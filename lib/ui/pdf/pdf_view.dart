@@ -9,7 +9,7 @@ import 'pdf_viewmodel.dart';
 
 class PdfView extends StatelessWidget {
   final BookDetails bookDetails;
-  PdfView({Key key, this.bookDetails}) : super(key: key);
+  PdfView({Key? key,required this.bookDetails}) : super(key: key);
   final PdfViewerController _pdfViewerController = PdfViewerController();
 
   @override
@@ -20,7 +20,7 @@ class PdfView extends StatelessWidget {
           viewModelBuilder: () => PdfViewModel(bookDetails),
           onModelReady: (model) => _pdfViewerController.jumpToPage(int.parse(bookDetails.lastReadPosition ?? '0')),
           builder: (_, viewModel, __) => SfPdfViewer.file(
-            File(bookDetails.path),
+            File(bookDetails.path!),
             controller: _pdfViewerController,
             pageSpacing: 5,
             onPageChanged: (pdfDetails) => viewModel.updateBook(pdfDetails.newPageNumber),

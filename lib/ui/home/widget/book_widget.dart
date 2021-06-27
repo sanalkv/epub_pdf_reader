@@ -7,12 +7,12 @@ import 'book_cover_widget.dart';
 class BookWidget extends StatelessWidget {
   final BookDetails bookDetails;
   final Function() onTap;
-  final Function onDelete;
+  final Function() onDelete;
 
   const BookWidget({
-    @required this.bookDetails,
-    @required this.onTap,
-    @required this.onDelete,
+    required this.bookDetails,
+    required this.onTap,
+    required this.onDelete,
   });
 
   @override
@@ -25,7 +25,7 @@ class BookWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             blurRadius: 10,
-            color: Colors.grey[300],
+            color: Colors.grey[300]!,
             offset: Offset(3, 0),
           )
         ],
@@ -52,7 +52,7 @@ class BookWidget extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         blurRadius: 6,
-                        color: Colors.grey[300],
+                        color: Colors.grey[300]!,
                         offset: Offset(0, 3),
                       )
                     ],
@@ -67,14 +67,14 @@ class BookWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        bookDetails.title,
+                        bookDetails.title!,
                         style: heading4Style,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       verticalSpacing4,
                       Text(
-                        bookDetails.author,
+                        bookDetails.author!,
                         style: body3Style,
                       ),
                       Spacer(),
